@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@model IEnumerable<Mvc1.Models.Article>
+
+
+
+
+<div class="span5 span5-spec">
+
+
+    @if (Roles.IsUserInRole("Manage")) { 
+        <p>
+            @Html.ActionLink("Редактировать статьи", "Index", "Manage")
+        </p>
+    }
+    @if (Roles.IsUserInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Пользователи", "Index", "Admin")
+    </p>
+}
+    <a href="Home/Cardiology">Кардология</a>
+    <a href="Home/Surgery">Хирургия</a>
+    <a href="Home/Dermatology">Дерматология</a>
+    <a href="Home/Stomatology">Стоматология</a>
+    <p>
+        <a href="Home/Publication">Предложить статью</a>
+    </p>
+    <table class="table table-striped table-condensed">
+        <thead>
+            <tr>
+                <th>Дата</th>
+                <th>Пользователь</th>
+                <th>Категория</th>
+                <th>Заголовок</th>
+                <th>Описание</th>
+            </tr>
+        </thead>
+
+
+
+
+        @if (Model.Count() > 0)
+        {
+            <tbody>
+                @foreach (var c in Model)
+                {
+                    <tr>
+                        <td>@c.Date</td>
+                        <td>@c.UserProfile.UserName </td>
+                        <td>@c.Category.Name</td>
+                        <td>@c.Title</td>
+                        <td>@c.Description</td>
+
+
+                        <td> @Html.ActionLink("Перейти к комментариям", "Comment", "Home")</td>
+                    </tr>
+                }
+
+
+            </tbody>
+
+        }
+
+
+    </table>
+
+</div>

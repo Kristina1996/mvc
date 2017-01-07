@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Publication";
+}
+
+@using (Html.BeginForm("Publication", "Home", FormMethod.Post, new { @class = "well span8" }))
+{
+    <div class="row">
+        <div class="span3">
+            <label>Заголовок</label>
+            <input type="text" class="span3" placeholder="Заголовок" name="Title">
+
+            <label>Категория</label>
+            <select id="category" name="CategoryId" class="span3">
+                <option value="na" selected="">Выбрать...</option>
+                @foreach (var c in ViewBag.Categories)
+                {
+                    <option value="@c.Id">@c.Name</option>
+                }
+
+            </select>
+
+
+
+        </div>
+        <div class="span5">
+            <label>Описание</label>
+            <textarea name="description" id="description" class="input-xlarge span5" rows="10"></textarea>
+        </div>
+
+        <label>Пользователь</label>
+        <select id="user" name="UserId" class="span3">
+            <option value="na" selected="">Выбрать...</option>
+            @foreach (var c in ViewBag.UserProfile)
+            {
+                if (@c.UserName == @User.Identity.Name)
+                {
+                    <option value="@c.UserId">@c.UserName</option>
+                }
+            }
+        </select>
+
+
+
+        <button type="submit" class="btn btn-primary pull-right">Предложить</button>
+    </div>
+}
+

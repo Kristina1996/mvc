@@ -1,0 +1,35 @@
+﻿@model Mvc1.Models.Comment
+
+@{
+    ViewBag.Title = "CreateComment";
+}
+
+<h2>CreateComment</h2>
+@using (Html.BeginForm("CreateComment", "Home", FormMethod.Post, new { @class = "well span8" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Комментарии</legend>
+
+        <div class="span5">
+            <label>Описание</label>
+            <textarea name="description" id="description" class="input-xlarge span5" rows="10"></textarea>
+        </div>
+
+        
+
+        <p>
+            <input type="submit" value="Отправить" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
